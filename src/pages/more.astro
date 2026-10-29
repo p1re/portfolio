@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import UsedTech from "../components/UsedTech.astro";
+---
+
+<Layout title="Más sobre mí | Nil Díaz" activePage="more">
+  <section class="page-intro">
+    <h1>Más sobre mí</h1>
+    <p>
+      Soy estudiante de Desarrollo de Aplicaciones Multiplataforma y me interesa
+      aprender cómo se construyen aplicaciones, desde sus interfaces hasta sus
+      bases de datos. Aquí puedes consultar algunas de las tecnologías que he
+      utilizado.
+    </p>
+  </section>
+
+  <UsedTech />
+</Layout>
+
+<style>
+  .page-intro {
+    margin-bottom: 2rem;
+  }
+</style>

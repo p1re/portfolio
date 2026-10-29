@@ -19,7 +19,7 @@
     overflow: hidden;
     border-radius: 1.2rem;
     padding: 4rem 1rem;
-    color: white;
+    color: var(--color-text);
     font-family: "Fira Code", monospace;
     z-index: 0;
   }
@@ -37,7 +37,7 @@
   }
 
   .about-overlay {
-    background: transparent;
+    background: var(--color-hero-overlay);
     border-radius: 1.5rem;
     max-width: 800px;
     margin: 0 auto;
@@ -52,7 +52,7 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 1rem;
-    color: #ffffff;
+    color: var(--color-text);
   }
 
   .about-text h3 {
@@ -62,7 +62,7 @@
   }
 
   .highlight {
-    color: #b4ff39;
+    color: var(--color-accent-strong);
   }
 
   .about-text p {
@@ -76,10 +76,10 @@
     font-size: 1.2rem;
     white-space: nowrap;
     overflow: hidden;
-    border-right: 2px solid yellowgreen;
+    border-right: 2px solid var(--color-accent);
     padding-right: 4px;
     animation: blink 0.7s step-end infinite;
-    color: white;
+    color: var(--color-text);
     min-height: 1.5em; /* 👈 esto fija una altura mínima */
   }
 
@@ -107,7 +107,7 @@
   }
 </style>
 <script>
-  const text = "Desarrollo de Aplicaciones Multiplataforma";
+  const text = "Desarrollador Full Stack";
   const element = document.getElementById("typewriter");
   let i = 0;
   let deleting = false;

@@ -5,7 +5,7 @@
 <aside class="studio">
   <style>
     .studio {
-      background-color: #1a1a1a;
+      background-color: var(--color-surface);
       padding: 2rem;
       border-radius: 12px;
       margin-top: 2rem;
@@ -14,7 +14,7 @@
     }
 
     .studio .tag {
-      color: orange;
+      color: var(--color-accent);
       font-weight: bold;
       font-size: 1rem;
       display: block;
@@ -31,15 +31,15 @@
       display: inline-block;
       margin-top: 1rem;
       padding: 0.5rem 1rem;
-      border: 1px solid #ccc;
+      border: 1px solid var(--color-border);
       border-radius: 6px;
-      color: white;
+      color: var(--color-text);
       text-decoration: none;
       transition: background 0.3s;
     }
 
     .studio .btn:hover {
-      background-color: #333;
+      background-color: var(--color-surface-raised);
     }
 
     .studio .cards {
@@ -50,7 +50,7 @@
     }
 
     .studio .card {
-      background-color: #222;
+      background-color: var(--color-surface-raised);
       padding: 1rem;
       border-radius: 10px;
       flex: 1 1 45%;
@@ -64,7 +64,7 @@
 
     .studio .card p {
       font-size: 0.95rem;
-      color: #ccc;
+      color: var(--color-text-muted);
       line-height: 1.4;
     }
   </style>
