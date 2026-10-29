@@ -1,88 +1,39 @@
 ---
-import Nav from "../components/Nav.astro";
+import Layout from "../layouts/Layout.astro";
 import Intro from "../components/Intro.astro";
-import Contact from "../components/Contact.astro";
 import Project from "../components/Project.astro";
-import Footer from "../components/Footer.astro";
 import UsedTech from "../components/UsedTech.astro";
 import AboutMe from "../components/AboutMe.astro";
 import Study from "../components/Study.astro";
 ---
 
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: #1a1a1a;
-        color: #ffffff;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .container {
-        width: 100%;
-        max-width: 1200px;
-        padding: 0 1rem;
-        margin: 0 auto;
-        box-sizing: border-box;
-      }
-
-      main {
-        border-radius: 1rem;
-        margin-top: 3rem;
-      }
-
-      h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-        color: #ffffff;
-      }
-
-      p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #ccc;
-      }
-      .about-study-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 2rem;
-        margin-top: 3rem;
-        flex-wrap: wrap;
-      }
-
-      .aboutme-wrapper,
-      .study-wrapper {
-        flex: 1 1 48%;
-        box-sizing: border-box;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <Nav activePage="home" />
-      <main>
-        <Intro />
-        <div class="about-study-row">
-          <div class="aboutme-wrapper">
-            <AboutMe />
-          </div>
-          <div class="study-wrapper">
-            <Study />
-          </div>
-        </div>
-
-        <Project />
-        <UsedTech />
-      </main>
-      <Footer />
+<Layout title="Nil Díaz | Portfolio" activePage="home">
+  <Intro />
+  <div class="about-study-row">
+    <div class="aboutme-wrapper">
+      <AboutMe />
     </div>
-  </body>
-</html>
+    <div class="study-wrapper">
+      <Study />
+    </div>
+  </div>
+
+  <Project />
+  <UsedTech />
+</Layout>
+
+<style>
+  .about-study-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .aboutme-wrapper,
+  .study-wrapper {
+    flex: 1 1 48%;
+    box-sizing: border-box;
+  }
+</style>

@@ -1,21 +1,120 @@
+---
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string;
+  activePage?: string;
+}
+
+const { title = "Portfolio personal", activePage = "home" } = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      const savedTheme = localStorage.getItem("portfolio-theme");
+      const prefersLight = window.matchMedia(
+        "(prefers-color-scheme: light)",
+      ).matches;
+      document.documentElement.dataset.theme =
+        savedTheme === "light" || savedTheme === "dark"
+          ? savedTheme
+          : prefersLight
+            ? "light"
+            : "dark";
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <div class="container">
+      <Nav activePage={activePage} />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>
 
 <style>
-  html {
-    font-family: system-ui, sans-serif;
-    background-color: black;
-    color: white;
+  :global(:root) {
+    color-scheme: dark;
+    --color-background: #1a1a1a;
+    --color-surface: #222;
+    --color-surface-raised: #2d2d2d;
+    --color-text: #fff;
+    --color-text-muted: #ccc;
+    --color-text-subtle: #888;
+    --color-border: rgba(255, 255, 255, 0.12);
+    --color-accent: yellowgreen;
+    --color-accent-strong: #b4ff39;
+    --color-link: #73aaff;
+    --color-secondary-button: #333;
+    --color-secondary-button-hover: #555;
+    --color-hero-overlay: rgba(0, 0, 0, 0.4);
+    --color-switch-thumb: #f3f4f6;
+    --color-switch-icon-active: #27303a;
+  }
+
+  :global(:root[data-theme="light"]) {
+    color-scheme: light;
+    --color-background: #f4f6f8;
+    --color-surface: #fff;
+    --color-surface-raised: #edf0f3;
+    --color-text: #1b2430;
+    --color-text-muted: #4b5563;
+    --color-text-subtle: #667085;
+    --color-border: rgba(27, 36, 48, 0.16);
+    --color-accent: #547a00;
+    --color-accent-strong: #496700;
+    --color-link: #0756b5;
+    --color-secondary-button: #e5e7eb;
+    --color-secondary-button-hover: #d1d5db;
+    --color-hero-overlay: rgba(255, 255, 255, 0.78);
+    --color-switch-thumb: #fff;
+    --color-switch-icon-active: #27303a;
+  }
+
+  :global(body) {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--color-background);
+    color: var(--color-text);
+    min-height: 100vh;
+    transition:
+      background-color 200ms ease,
+      color 200ms ease;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  main {
+    border-radius: 1rem;
+    margin-top: 3rem;
+  }
+
+  :global(h1) {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  :global(p) {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
   }
 </style>

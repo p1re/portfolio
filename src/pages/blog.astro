@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const posts: Array<{ title: string; date: string; summary: string }> = [];
+---
+
+<Layout title="Blog | Nil Díaz" activePage="blog">
+  <section class="page-intro">
+    <h1>Blog</h1>
+    <p>
+      Notas, aprendizajes y experiencias sobre desarrollo y tecnología.
+    </p>
+  </section>
+
+  {
+    posts.length > 0 ? (
+      <div class="posts">
+        {posts.map((post) => (
+          <article class="post-card">
+            <p class="post-date">{post.date}</p>
+            <h2>{post.title}</h2>
+            <p>{post.summary}</p>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">
+        Todavía no hay publicaciones. Cuando añada artículos, aparecerán aquí.
+      </p>
+    )
+  }
+</Layout>
+
+<style>
+  .page-intro {
+    margin-bottom: 2rem;
+  }
+
+  .posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .post-card,
+  .empty-state {
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    background: var(--color-surface);
+  }
+
+  .post-card h2 {
+    margin: 0 0 0.75rem;
+    color: var(--color-text);
+  }
+
+  .post-date {
+    color: var(--color-accent);
+    font-size: 0.9rem;
+  }
+
+  .empty-state {
+    color: var(--color-text-muted);
+  }
+</style>

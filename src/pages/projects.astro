@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Project from "../components/Project.astro";
+---
+
+<Layout title="Proyectos | Nil Díaz" activePage="projects">
+  <section class="page-intro">
+    <h1>Proyectos</h1>
+    <p>
+      Una selección de proyectos en los que he puesto en práctica lo que voy
+      aprendiendo. Esta página está preparada para ir añadiendo nuevos trabajos.
+    </p>
+  </section>
+
+  <Project />
+</Layout>
+
+<style>
+  .page-intro {
+    margin-bottom: 2rem;
+  }
+</style>
