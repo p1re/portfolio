@@ -1,0 +1,66 @@
+---
+import { projects } from "../../data/portfolio";
+import ProjectCard from "./ProjectCard.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+interface Props {
+  heading?: string;
+  description?: string;
+  showAllLink?: boolean;
+}
+
+const {
+  heading = "Proyectos seleccionados",
+  description = "Una selección de proyectos donde aplico lo que voy aprendiendo.",
+  showAllLink = false,
+} = Astro.props;
+---
+
+<section
+  class="projects section-block"
+  id="projects"
+  aria-labelledby="projects-title"
+>
+  <SectionHeading
+    id="projects-title"
+    eyebrow="02 / Trabajo"
+    title={heading}
+    description={description}
+  />
+  <div class="project-grid">
+    {projects.map((project, index) => <ProjectCard project={project} index={index + 1} />)}
+  </div>
+  {showAllLink && (
+    <a class="all-projects" href="/projects">
+      Ver todos los proyectos <span aria-hidden="true">→</span>
+    </a>
+  )}
+</section>
+
+<style>
+  .section-block {
+    padding: clamp(3.5rem, 8vw, 6rem) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .all-projects {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    color: var(--color-text);
+    font-weight: 700;
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 0.3rem;
+  }
+
+  .all-projects span {
+    color: var(--color-accent);
+  }
+</style>

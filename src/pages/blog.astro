@@ -6,6 +6,7 @@ const posts: Array<{ title: string; date: string; summary: string }> = [];
 
 <Layout title="Blog | Nil Díaz" activePage="blog">
   <section class="page-intro">
+    <p class="eyebrow">Notas y aprendizajes</p>
     <h1>Blog</h1>
     <p>
       Notas, aprendizajes y experiencias sobre desarrollo y tecnología.
@@ -33,21 +34,26 @@ const posts: Array<{ title: string; date: string; summary: string }> = [];
 
 <style>
   .page-intro {
-    margin-bottom: 2rem;
+    max-width: 52rem;
+    padding: clamp(4rem, 10vw, 7rem) 0 clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .eyebrow {
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
   .posts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
+    max-width: 52rem;
+    border-top: 1px solid var(--color-border);
   }
 
-  .post-card,
-  .empty-state {
-    padding: 1.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    background: var(--color-surface);
+  .post-card {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .post-card h2 {
@@ -61,6 +67,13 @@ const posts: Array<{ title: string; date: string; summary: string }> = [];
   }
 
   .empty-state {
+    max-width: 52rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--color-border);
     color: var(--color-text-muted);
+  }
+
+  :global(.post-date) {
+    color: var(--color-accent);
   }
 </style>

@@ -1,0 +1,73 @@
+---
+import { technologies } from "../../data/portfolio";
+import SectionHeading from "./SectionHeading.astro";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<section
+  class:list={["skills", "section-block", compact && "compact"]}
+  id="technologies"
+  aria-labelledby="skills-title"
+>
+  <SectionHeading
+    id="skills-title"
+    eyebrow="04 / Tecnologías"
+    title="Herramientas que utilizo."
+    description="Tecnologías con las que he trabajado en proyectos y durante mi formación."
+  />
+  <ul class="technology-grid">
+    {
+      technologies.map((technology) => (
+        <li class="technology">
+          <img src={technology.icon} alt="" loading="lazy" />
+          <span>{technology.name}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .section-block {
+    padding: clamp(3.5rem, 8vw, 6rem) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .technology-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .technology {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 3rem;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .technology img {
+    width: 1.2rem;
+    height: 1.2rem;
+    object-fit: contain;
+  }
+
+  .compact .technology-grid {
+    gap: 0.5rem;
+  }
+</style>

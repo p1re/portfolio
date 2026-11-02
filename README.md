@@ -47,21 +47,28 @@ Para comprobar la versión de producción, ejecuta `npm run build` y después
 /
 ├── public/             # Imágenes, iconos y otros archivos estáticos
 ├── src/
-│   ├── components/     # Secciones y componentes del portfolio
+│   ├── components/
+│   │   ├── sections/  # Secciones y piezas reutilizables de la interfaz
+│   │   ├── Nav.astro  # Navegación superior y selector de tema
+│   │   └── Footer.astro
+│   ├── data/           # Contenido de proyectos, formación y tecnologías
 │   ├── layouts/        # Estructuras compartidas de página
-│   └── pages/          # Páginas del sitio; index.astro es la página principal
+│   ├── pages/          # Rutas del sitio; index.astro es la página principal
+│   └── styles/         # Variables de tema, tipografía y estilos globales
 ├── astro.config.mjs    # Configuración de Astro
 └── package.json        # Dependencias y comandos del proyecto
 ```
 
 ## Cómo hacer cambios
 
-- Edita `src/pages/index.astro` para cambiar la composición de la página
-  principal.
-- Modifica los componentes de `src/components/` para actualizar las secciones
-  de presentación, estudios, proyectos, tecnologías o contacto.
-- Añade o sustituye imágenes e iconos en `public/` y referencia sus rutas desde
-  los componentes.
+- Edita `src/pages/` para cambiar la composición de una ruta.
+- Modifica o añade secciones en `src/components/sections/`.
+- Ajusta los enlaces de navegación y el selector de tema en
+  `src/components/Nav.astro`.
+- Actualiza proyectos, formación y tecnologías en `src/data/portfolio.ts`.
+- Añade imágenes e iconos en `public/` y referencia sus rutas desde los
+  componentes.
+- Ajusta la paleta, los temas y la tipografía en `src/styles/global.css`.
 
 Antes de compartir cambios, puedes verificar que el sitio se genera
 correctamente con `npm run build`.

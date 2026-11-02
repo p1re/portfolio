@@ -1,0 +1,230 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<section class="hero" id="home" aria-labelledby="hero-title">
+  <div class="hero-content">
+    <p class="eyebrow">
+      Portfolio personal <span aria-hidden="true">/</span> {currentYear}
+    </p>
+    <h1 id="hero-title">Hola, soy <span>Nil Díaz.</span></h1>
+    <p class="hero-role">
+      Desarrollador Full Stack en formación. Me gusta aprender construyendo
+      aplicaciones útiles, cuidando tanto la lógica como la experiencia.
+    </p>
+    <div class="hero-actions">
+      <a class="hero-link primary" href="#projects">
+        Ver proyectos <span aria-hidden="true">↘</span>
+      </a>
+      <a class="hero-link secondary" href="#about">Conóceme</a>
+    </div>
+  </div>
+  <a class="scroll-cue" href="#about" aria-label="Desplazarse a la sección Sobre mí">
+    <span aria-hidden="true"></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: min(52rem, calc(100svh - 5rem));
+    margin: 0 0 clamp(3rem, 7vw, 5rem);
+    overflow: hidden;
+    isolation: isolate;
+    text-align: center;
+  }
+
+  .hero::before,
+  .hero::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+  }
+
+  .hero::before {
+    z-index: -2;
+    background:
+      radial-gradient(
+        ellipse at 50% 42%,
+        color-mix(in srgb, var(--color-accent) 11%, transparent),
+        transparent 58%
+      ),
+      radial-gradient(
+        circle,
+        color-mix(in srgb, var(--color-text) 35%, transparent) 1px,
+        transparent 1.5px
+      );
+    background-size: auto, 3.25rem 3.25rem;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 18%,
+      #000 78%,
+      transparent 100%
+    );
+    animation: ambient-drift 24s ease-in-out infinite alternate;
+  }
+
+  .hero::after {
+    z-index: -1;
+    background: linear-gradient(
+      180deg,
+      var(--color-background) 0%,
+      transparent 24%,
+      transparent 78%,
+      var(--color-background) 100%
+    );
+  }
+
+  .hero-content {
+    width: min(100%, 58rem);
+    padding: 4rem 1rem 5rem;
+  }
+
+  .eyebrow {
+    margin-bottom: 1.25rem;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow span {
+    padding: 0 0.35rem;
+    color: var(--color-accent);
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    letter-spacing: -0.07em;
+  }
+
+  h1 span {
+    color: var(--color-accent);
+  }
+
+  .hero-role {
+    max-width: 39rem;
+    margin: 0 auto 2rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .hero-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    min-height: 3.15rem;
+    padding: 0.7rem 1.3rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .hero-link.primary {
+    background: transparent;
+    color: var(--color-accent);
+  }
+
+  .hero-link.secondary {
+    border-color: var(--color-border);
+    color: var(--color-text);
+  }
+
+  .hero-link:hover,
+  .hero-link:focus-visible {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-background);
+    transform: translateY(-2px);
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
+
+  .scroll-cue span {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 1px solid var(--color-accent);
+    border-bottom: 1px solid var(--color-accent);
+    transform: translateY(-0.15rem) rotate(45deg);
+  }
+
+  .hero-link:focus-visible,
+  .scroll-cue:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
+  @keyframes ambient-drift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(0, -0.75rem, 0);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      min-height: min(42rem, calc(100svh - 4.5rem));
+    }
+
+    .hero-content {
+      padding: 3rem 0.25rem 4rem;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 13vw, 4.5rem);
+    }
+
+    .hero-role {
+      max-width: 30rem;
+    }
+
+    .scroll-cue {
+      bottom: 0.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero::before {
+      animation: none;
+    }
+
+    .hero-link,
+    .scroll-cue {
+      transition: none;
+    }
+  }
+</style>

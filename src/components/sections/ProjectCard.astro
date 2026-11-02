@@ -1,0 +1,184 @@
+---
+import type { Project } from "../../data/portfolio";
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+---
+
+<article class="project-card">
+  <a
+    class="project-image"
+    href={project.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`Visitar proyecto: ${project.title}`}
+  >
+    <img src={project.image} alt={project.imageAlt} loading="lazy" />
+    <span class="project-number">{String(index).padStart(2, "0")}</span>
+    <span class="visit-mark" aria-hidden="true">↗</span>
+  </a>
+
+  <div class="project-content">
+    <p class="project-date">{project.date}</p>
+    <h3>{project.title}</h3>
+    <p class="project-description">{project.description}</p>
+    <ul class="technology-list" aria-label="Tecnologías del proyecto">
+      {project.technologies.map((technology) => <li>{technology}</li>)}
+    </ul>
+    <a class="project-link" href={project.href} target="_blank" rel="noopener noreferrer">
+      Visitar proyecto <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    align-items: stretch;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    background: var(--color-surface);
+    transition:
+      transform 200ms ease,
+      border-color 200ms ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+  }
+
+  .project-image {
+    position: relative;
+    display: block;
+    min-height: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--color-surface-raised);
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms ease;
+  }
+
+  .project-card:hover .project-image img {
+    transform: scale(1.025);
+  }
+
+  .project-number,
+  .visit-mark {
+    position: absolute;
+    top: 1rem;
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(17, 20, 18, 0.72);
+    color: #fff;
+    backdrop-filter: blur(8px);
+  }
+
+  .project-number {
+    left: 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .visit-mark {
+    right: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .project-content {
+    align-self: center;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .project-date {
+    margin-bottom: 0.75rem;
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  h3 {
+    margin-bottom: 0.75rem;
+    font-size: clamp(1.25rem, 3vw, 1.65rem);
+  }
+
+  .project-description {
+    max-width: 48rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .technology-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .technology-list li {
+    padding: 0.35rem 0.65rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1.5rem;
+    color: var(--color-accent);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .project-link span {
+    transition: transform 180ms ease;
+  }
+
+  .project-link:hover span,
+  .project-link:focus-visible span {
+    transform: translate(2px, -2px);
+  }
+
+  .project-link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 760px) {
+    .project-card {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .project-image {
+      min-height: 0;
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card,
+    .project-image img {
+      transition: none;
+    }
+  }
+</style>

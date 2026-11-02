@@ -1,0 +1,114 @@
+---
+---
+
+<section class="about section-block" id="about" aria-labelledby="about-title">
+  <p class="eyebrow">Sobre mí</p>
+  <h2 id="about-title">Aprender construyendo.</h2>
+  <div class="about-content">
+    <figure class="about-portrait">
+      <img
+        src="/aboutme.jpg"
+        alt="Nil caminando por un paisaje natural"
+        loading="lazy"
+      />
+      <figcaption>Nil Díaz <span>·</span> Desarrollador en formación</figcaption>
+    </figure>
+    <div class="about-copy">
+      <p>
+        Soy estudiante de Desarrollo de Aplicaciones Multiplataforma. Durante mi
+        formación estoy explorando distintas áreas del desarrollo, desde la
+        programación hasta la creación de interfaces y el trabajo con bases de
+        datos.
+      </p>
+      <p>
+        Disfruto afrontar retos técnicos, aprender herramientas nuevas y mejorar
+        cada proyecto con atención al detalle.
+      </p>
+      <p>
+        En este portfolio comparto mis proyectos, mi formación y las tecnologías
+        que utilizo para seguir creciendo como desarrollador.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-block {
+    padding: clamp(3rem, 7vw, 5rem) 0 clamp(3.5rem, 8vw, 6rem);
+  }
+
+  .about {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 5rem);
+    margin-top: 2rem;
+  }
+
+  .about-portrait {
+    margin: 0;
+  }
+
+  .about-portrait img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    object-fit: cover;
+    object-position: center 52%;
+  }
+
+  .about-portrait figcaption {
+    margin-top: 0.75rem;
+    color: var(--color-text-subtle);
+    font-size: 0.8rem;
+  }
+
+  .about-portrait figcaption span {
+    padding: 0 0.25rem;
+    color: var(--color-accent);
+  }
+
+  .about-copy {
+    max-width: 44rem;
+  }
+
+  .about-copy p {
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+  }
+
+  .about-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .eyebrow {
+    margin-bottom: 0.75rem;
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    max-width: 18ch;
+    margin-bottom: 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  @media (max-width: 700px) {
+    .about-content {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .about-portrait {
+      max-width: 32rem;
+    }
+  }
+</style>

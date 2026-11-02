@@ -1,18 +1,58 @@
+---
+const year = new Date().getFullYear();
+---
+
 <footer>
-  <p>© 2025 Nil Díaz. Todos los derechos reservados.</p>
+  <p>© {year} Nil Díaz</p>
+  <nav aria-label="Enlaces del pie de página">
+    <a href="/projects">Proyectos</a>
+    <a href="/blog">Blog</a>
+    <a href="/more">Formación completa</a>
+  </nav>
+  <a href="#top" aria-label="Volver al inicio de la página">Volver arriba ↑</a>
 </footer>
 
 <style>
   footer {
-    text-align: center;
-    margin-top: 3rem;
-    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding: 1.5rem 0;
     border-top: 1px solid var(--color-border);
     color: var(--color-text-subtle);
     font-size: 0.9rem;
   }
 
   footer p {
+    margin: 0;
     color: var(--color-text-subtle);
+  }
+
+  footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  footer a {
+    color: var(--color-text-muted);
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 0.25rem;
+  }
+
+  @media (max-width: 480px) {
+    footer {
+      align-items: flex-start;
+      flex-direction: column;
+      font-size: 0.85rem;
+    }
+
+    footer nav {
+      justify-content: flex-start;
+    }
   }
 </style>

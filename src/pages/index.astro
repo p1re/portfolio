@@ -1,39 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Intro from "../components/Intro.astro";
-import Project from "../components/Project.astro";
-import UsedTech from "../components/UsedTech.astro";
-import AboutMe from "../components/AboutMe.astro";
-import Study from "../components/Study.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import AboutSection from "../components/sections/AboutSection.astro";
+import ProjectsSection from "../components/sections/ProjectsSection.astro";
+import EducationSection from "../components/sections/EducationSection.astro";
+import SkillsSection from "../components/sections/SkillsSection.astro";
 ---
 
 <Layout title="Nil Díaz | Portfolio" activePage="home">
-  <Intro />
-  <div class="about-study-row">
-    <div class="aboutme-wrapper">
-      <AboutMe />
-    </div>
-    <div class="study-wrapper">
-      <Study />
-    </div>
-  </div>
-
-  <Project />
-  <UsedTech />
+  <HeroSection />
+  <AboutSection />
+  <ProjectsSection showAllLink />
+  <EducationSection />
+  <SkillsSection />
 </Layout>
-
-<style>
-  .about-study-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-top: 3rem;
-    flex-wrap: wrap;
-  }
-
-  .aboutme-wrapper,
-  .study-wrapper {
-    flex: 1 1 48%;
-    box-sizing: border-box;
-  }
-</style>
