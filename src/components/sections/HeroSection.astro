@@ -1,12 +1,5 @@
----
-const currentYear = new Date().getFullYear();
----
-
 <section class="hero" id="home" aria-labelledby="hero-title">
   <div class="hero-content">
-    <p class="eyebrow">
-      Portfolio personal <span aria-hidden="true">/</span> {currentYear}
-    </p>
     <h1 id="hero-title">Hola, soy <span>Nil Díaz.</span></h1>
     <p class="hero-role">
       Desarrollador Full Stack en formación. Me gusta aprender construyendo
@@ -34,49 +27,6 @@ const currentYear = new Date().getFullYear();
     overflow: hidden;
     isolation: isolate;
     text-align: center;
-  }
-
-  .hero::before,
-  .hero::after {
-    position: absolute;
-    inset: 0;
-    content: "";
-    pointer-events: none;
-  }
-
-  .hero::before {
-    z-index: -2;
-    background:
-      radial-gradient(
-        ellipse at 50% 42%,
-        color-mix(in srgb, var(--color-accent) 11%, transparent),
-        transparent 58%
-      ),
-      radial-gradient(
-        circle,
-        color-mix(in srgb, var(--color-text) 35%, transparent) 1px,
-        transparent 1.5px
-      );
-    background-size: auto, 3.25rem 3.25rem;
-    mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      #000 18%,
-      #000 78%,
-      transparent 100%
-    );
-    animation: ambient-drift 24s ease-in-out infinite alternate;
-  }
-
-  .hero::after {
-    z-index: -1;
-    background: linear-gradient(
-      180deg,
-      var(--color-background) 0%,
-      transparent 24%,
-      transparent 78%,
-      var(--color-background) 100%
-    );
   }
 
   .hero-content {
@@ -185,16 +135,6 @@ const currentYear = new Date().getFullYear();
     outline-offset: 4px;
   }
 
-  @keyframes ambient-drift {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-
-    to {
-      transform: translate3d(0, -0.75rem, 0);
-    }
-  }
-
   @media (max-width: 600px) {
     .hero {
       min-height: min(42rem, calc(100svh - 4.5rem));
@@ -218,10 +158,6 @@ const currentYear = new Date().getFullYear();
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero::before {
-      animation: none;
-    }
-
     .hero-link,
     .scroll-cue {
       transition: none;

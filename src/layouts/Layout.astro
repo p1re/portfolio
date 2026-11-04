@@ -40,6 +40,7 @@ const { title = "Portfolio personal", activePage = "home" } = Astro.props;
   </head>
   <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <div class="cursor-glow" data-cursor-glow aria-hidden="true"></div>
     <div class="site-shell" id="top">
       <Nav activePage={activePage} />
       <main id="main-content">
@@ -51,6 +52,10 @@ const { title = "Portfolio personal", activePage = "home" } = Astro.props;
 </html>
 
 <style>
+  :global(body) {
+    isolation: isolate;
+  }
+
   .skip-link {
     position: fixed;
     top: 0.75rem;
@@ -70,9 +75,30 @@ const { title = "Portfolio personal", activePage = "home" } = Astro.props;
   }
 
   .site-shell {
+    position: relative;
+    z-index: 1;
     width: min(100%, 1440px);
     margin: 0 auto;
     padding: 0 clamp(1rem, 5vw, 4rem);
+  }
+
+  .cursor-glow {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    background: radial-gradient(
+      720px circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+      color-mix(in srgb, var(--color-accent) 20%, transparent) 0%,
+      transparent 80%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 240ms ease;
+  }
+
+  .cursor-glow.is-visible {
+    opacity: 1;
   }
 
   main {
@@ -89,4 +115,56 @@ const { title = "Portfolio personal", activePage = "home" } = Astro.props;
       min-height: calc(100vh - 4.5rem);
     }
   }
+
+  @media (hover: none), (pointer: coarse) {
+    .cursor-glow {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor-glow {
+      transition: none;
+    }
+  }
 </style>
+
+<script>
+  const cursorGlow = document.querySelector<HTMLElement>("[data-cursor-glow]");
+  const finePointer = window.matchMedia(
+    "(hover: hover) and (pointer: fine)",
+  );
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  );
+
+  function hideCursorGlow() {
+    cursorGlow?.classList.remove("is-visible");
+  }
+
+  if (cursorGlow && finePointer.matches && !reducedMotion.matches) {
+    window.addEventListener(
+      "pointermove",
+      (event) => {
+        if (event.pointerType !== "mouse" && event.pointerType !== "pen") {
+          hideCursorGlow();
+          return;
+        }
+
+        cursorGlow.style.setProperty("--cursor-x", `${event.clientX}px`);
+        cursorGlow.style.setProperty("--cursor-y", `${event.clientY}px`);
+        cursorGlow.classList.add("is-visible");
+      },
+      { passive: true },
+    );
+
+    document.addEventListener("pointerout", (event) => {
+      if (!event.relatedTarget) hideCursorGlow();
+    });
+
+    window.addEventListener("blur", hideCursorGlow);
+    reducedMotion.addEventListener("change", (event) => {
+      if (event.matches) hideCursorGlow();
+    });
+  }
+</script>

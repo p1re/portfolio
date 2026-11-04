@@ -36,7 +36,11 @@ const links = [
     href: activePage === "more" ? "/more#technologies" : "/#technologies",
     section: activePage === "home" || activePage === "more" ? "technologies" : undefined,
   },
-  { name: "Blog", page: "blog", href: "/blog" },
+  {
+    name: "Blog",
+    page: "blog",
+    href: "/blog",
+  },
 ];
 
 const isCurrentPage = (page: string) =>
@@ -62,14 +66,14 @@ const isCurrentPage = (page: string) =>
     <ul class="nav-links">
       {
         links.map(({ name, page, href, section }) => (
-          <li>
-            <a
-              href={href}
-              class:active={isCurrentPage(page)}
-              data-section={section}
-              aria-current={isCurrentPage(page) ? "page" : undefined}
-            >
-              {name}
+            <li>
+              <a
+                href={href}
+                class:active={isCurrentPage(page)}
+                data-section={section}
+                aria-current={isCurrentPage(page) ? "page" : undefined}
+              >
+                {name}
             </a>
           </li>
         ))
@@ -116,16 +120,16 @@ const isCurrentPage = (page: string) =>
     background: color-mix(in srgb, var(--color-background) 96%, transparent);
     backdrop-filter: blur(14px);
     box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.08);
+    transition:
+      transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 240ms ease;
+    will-change: transform, opacity;
   }
 
-  .brand {
-    justify-self: start;
-    color: var(--color-accent);
-    font-family: var(--font-display);
-    font-size: 1.75rem;
-    font-weight: 700;
-    letter-spacing: -0.08em;
-    text-decoration: none;
+  .site-header.nav-hidden {
+    transform: translateY(calc(-100% - 1.5rem)) scale(0.98);
+    opacity: 0;
+    pointer-events: none;
   }
 
   nav {
@@ -163,7 +167,8 @@ const isCurrentPage = (page: string) =>
     content: "";
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 180ms ease;
+    transition:
+      transform 180ms ease;
   }
 
   .nav-links a:hover,
@@ -392,6 +397,7 @@ const isCurrentPage = (page: string) =>
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .site-header,
     .theme-toggle,
     .theme-toggle-thumb,
     .nav-links a,
@@ -408,10 +414,19 @@ const isCurrentPage = (page: string) =>
   const menuToggle =
     document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
   const navigation = document.querySelector<HTMLElement>("#site-navigation");
+  const header = document.querySelector<HTMLElement>(".site-header");
   const themeToggle =
     document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  );
+
+  function showHeader() {
+    header?.classList.remove("nav-hidden");
+  }
 
   function setMenuOpen(isOpen: boolean) {
+    if (isOpen) showHeader();
     navigation?.classList.toggle("is-open", isOpen);
     menuToggle?.setAttribute("aria-expanded", String(isOpen));
     menuToggle?.setAttribute(
@@ -447,6 +462,56 @@ const isCurrentPage = (page: string) =>
       localStorage.setItem("portfolio-theme", nextTheme);
       updateThemeToggle();
     });
+  }
+
+  if (header && !prefersReducedMotion.matches) {
+    let previousScrollY = window.scrollY;
+    let direction = 0;
+    let directionDistance = 0;
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        const currentScrollY = window.scrollY;
+        const delta = currentScrollY - previousScrollY;
+        previousScrollY = currentScrollY;
+
+        if (currentScrollY <= 80) {
+          direction = 0;
+          directionDistance = 0;
+          showHeader();
+          return;
+        }
+
+        if (menuToggle?.getAttribute("aria-expanded") === "true") {
+          direction = 0;
+          directionDistance = 0;
+          showHeader();
+          return;
+        }
+
+        if (Math.abs(delta) < 1) return;
+
+        const nextDirection = Math.sign(delta);
+        if (nextDirection !== direction) {
+          direction = nextDirection;
+          directionDistance = delta;
+        } else {
+          directionDistance += delta;
+        }
+
+        if (directionDistance > 14) {
+          header.classList.add("nav-hidden");
+          directionDistance = 0;
+        } else if (directionDistance < -10) {
+          showHeader();
+          directionDistance = 0;
+        }
+      },
+      { passive: true },
+    );
+
+    header.addEventListener("focusin", showHeader);
   }
 
   const sectionLinks = Array.from(
